@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "C:/Users/Matze/Amiga/Hardwarehacks/CDTV-RAM-IDE/Logic/CDTV-RAM-IDE/CDTV_RAM_IDE_Testbench_isim_beh.exe" -prj "C:/Users/Matze/Amiga/Hardwarehacks/CDTV-RAM-IDE/Logic/CDTV-RAM-IDE/CDTV_RAM_IDE_Testbench_beh.prj" "work.CDTV_RAM_IDE_Testbench" 

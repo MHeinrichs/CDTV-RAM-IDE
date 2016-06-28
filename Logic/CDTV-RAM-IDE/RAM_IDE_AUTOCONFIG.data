@@ -1,0 +1,2424 @@
+MODELDATA
+MODELDATA_VERSION "v1998.8"
+DESIGN "RAM_IDE_AUTOCONFIG";
+
+/* port drive, load, max capacitance and max transition in data file */
+PORTDATA
+BERR: MAXTRANS(0.0);
+AS: MAXTRANS(0.0);
+CLK50M: MAXTRANS(0.0);
+RESET: MAXTRANS(0.0);
+UDS: MAXTRANS(0.0);
+RW: MAXTRANS(0.0);
+MEM_OFF: MAXTRANS(0.0);
+AMIGA_CLK: MAXTRANS(0.0);
+A<4>: MAXTRANS(0.0);
+A<3>: MAXTRANS(0.0);
+A<1>: MAXTRANS(0.0);
+A<5>: MAXTRANS(0.0);
+A<6>: MAXTRANS(0.0);
+A<2>: MAXTRANS(0.0);
+IDE_OFF: MAXTRANS(0.0);
+A<22>: MAXTRANS(0.0);
+A<21>: MAXTRANS(0.0);
+A<19>: MAXTRANS(0.0);
+A<23>: MAXTRANS(0.0);
+A<17>: MAXTRANS(0.0);
+A<16>: MAXTRANS(0.0);
+A<18>: MAXTRANS(0.0);
+A<20>: MAXTRANS(0.0);
+BGACK: MAXTRANS(0.0);
+LDS: MAXTRANS(0.0);
+A<9>: MAXTRANS(0.0);
+A<10>: MAXTRANS(0.0);
+A<11>: MAXTRANS(0.0);
+A<12>: MAXTRANS(0.0);
+A<13>: MAXTRANS(0.0);
+A<14>: MAXTRANS(0.0);
+A<15>: MAXTRANS(0.0);
+A<7>: MAXTRANS(0.0);
+A<8>: MAXTRANS(0.0);
+D<8>: MAXTRANS(0.0);
+D<9>: MAXTRANS(0.0);
+D<10>: MAXTRANS(0.0);
+D<11>: MAXTRANS(0.0);
+D<12>: MAXTRANS(0.0);
+D<13>: MAXTRANS(0.0);
+D<14>: MAXTRANS(0.0);
+D<15>: MAXTRANS(0.0);
+DRAM<0>: MAXTRANS(0.0);
+DRAM<10>: MAXTRANS(0.0);
+DRAM<11>: MAXTRANS(0.0);
+DRAM<12>: MAXTRANS(0.0);
+DRAM<13>: MAXTRANS(0.0);
+DRAM<14>: MAXTRANS(0.0);
+DRAM<15>: MAXTRANS(0.0);
+DRAM<1>: MAXTRANS(0.0);
+DRAM<2>: MAXTRANS(0.0);
+DRAM<3>: MAXTRANS(0.0);
+DRAM<4>: MAXTRANS(0.0);
+DRAM<5>: MAXTRANS(0.0);
+DRAM<6>: MAXTRANS(0.0);
+DRAM<7>: MAXTRANS(0.0);
+DRAM<8>: MAXTRANS(0.0);
+DRAM<9>: MAXTRANS(0.0);
+AS_AMIGA: MAXTRANS(0.0);
+D<0>: MAXTRANS(0.0);
+D<1>: MAXTRANS(0.0);
+D<2>: MAXTRANS(0.0);
+D<3>: MAXTRANS(0.0);
+D<4>: MAXTRANS(0.0);
+D<5>: MAXTRANS(0.0);
+D<6>: MAXTRANS(0.0);
+D<7>: MAXTRANS(0.0);
+DTACK: MAXTRANS(0.0);
+ARAM<0>: MAXTRANS(0.0);
+ARAM<1>: MAXTRANS(0.0);
+ARAM<10>: MAXTRANS(0.0);
+ARAM<11>: MAXTRANS(0.0);
+ARAM<2>: MAXTRANS(0.0);
+ARAM<3>: MAXTRANS(0.0);
+ARAM<4>: MAXTRANS(0.0);
+ARAM<5>: MAXTRANS(0.0);
+ARAM<6>: MAXTRANS(0.0);
+ARAM<7>: MAXTRANS(0.0);
+ARAM<8>: MAXTRANS(0.0);
+ARAM<9>: MAXTRANS(0.0);
+BA<0>: MAXTRANS(0.0);
+BA<1>: MAXTRANS(0.0);
+CAS: MAXTRANS(0.0);
+IDE_R: MAXTRANS(0.0);
+IDE_W: MAXTRANS(0.0);
+LDQM: MAXTRANS(0.0);
+MEM_CS: MAXTRANS(0.0);
+MEM_WE: MAXTRANS(0.0);
+RAS: MAXTRANS(0.0);
+ROM_OE: MAXTRANS(0.0);
+UDQM: MAXTRANS(0.0);
+CLK_MEM: MAXTRANS(0.0);
+IDE_A<0>: MAXTRANS(0.0);
+IDE_A<1>: MAXTRANS(0.0);
+IDE_A<2>: MAXTRANS(0.0);
+IDE_CS<0>: MAXTRANS(0.0);
+IDE_CS<1>: MAXTRANS(0.0);
+ROM_BANK<0>: MAXTRANS(0.0);
+ROM_BANK<1>: MAXTRANS(0.0);
+ROM_BANK<2>: MAXTRANS(0.0);
+ROM_BANK<3>: MAXTRANS(0.0);
+ROM_WE: MAXTRANS(0.0);
+CKE: MAXTRANS(0.0);
+ENDPORTDATA
+
+/* timing arc data */
+TIMINGDATA
+
+ARCDATA
+AS_AS_AMIGA_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_CLK_MEM_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<10>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<10>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<11>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<11>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<12>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<12>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<13>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<13>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<14>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<14>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<15>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<15>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<3>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<3>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<4>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<4>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<5>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<5>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<6>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<6>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<7>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<7>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<8>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<8>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+AS_D<9>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_D<9>_delay:
+CELL_RISE(scalar) {
+  VALUES("18.7");
+}
+CELL_FALL(scalar) {
+  VALUES("18.7");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<0>_DRAM<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<10>_DRAM<10>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<10>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<10>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<11>_DRAM<11>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<11>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<11>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<12>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<12>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<12>_DRAM<12>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+D<13>_DRAM<13>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<13>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<13>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<14>_DRAM<14>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<14>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<14>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<15>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<15>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<15>_DRAM<15>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<1>_DRAM<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<2>_DRAM<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<3>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<3>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<3>_DRAM<3>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<4>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<4>_DRAM<4>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<4>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<5>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<5>_DRAM<5>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<5>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<6>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<6>_DRAM<6>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<6>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<7>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<7>_DRAM<7>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<7>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<8>_DRAM<8>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<8>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<8>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+AS_DRAM<9>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+RW_DRAM<9>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+D<9>_DRAM<9>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+A<9>_IDE_A<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+A<10>_IDE_A<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+A<11>_IDE_A<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+A<12>_IDE_CS<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+A<13>_IDE_CS<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+A<16>_ROM_BANK<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+A<17>_ROM_BANK<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("11");
+}
+CELL_FALL(scalar) {
+  VALUES("11");
+}
+ENDARCDATA
+
+ARCDATA
+A<18>_ROM_BANK<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+A<19>_ROM_BANK<3>_delay:
+CELL_RISE(scalar) {
+  VALUES("10");
+}
+CELL_FALL(scalar) {
+  VALUES("10");
+}
+ENDARCDATA
+
+ARCDATA
+AMIGA_CLK_D<12>_delay:
+CELL_RISE(scalar) {
+  VALUES("13.5");
+}
+CELL_FALL(scalar) {
+  VALUES("13.5");
+}
+ENDARCDATA
+
+ARCDATA
+AMIGA_CLK_D<13>_delay:
+CELL_RISE(scalar) {
+  VALUES("13.5");
+}
+CELL_FALL(scalar) {
+  VALUES("13.5");
+}
+ENDARCDATA
+
+ARCDATA
+AMIGA_CLK_D<14>_delay:
+CELL_RISE(scalar) {
+  VALUES("13.5");
+}
+CELL_FALL(scalar) {
+  VALUES("13.5");
+}
+ENDARCDATA
+
+ARCDATA
+AMIGA_CLK_D<15>_delay:
+CELL_RISE(scalar) {
+  VALUES("13.5");
+}
+CELL_FALL(scalar) {
+  VALUES("13.5");
+}
+ENDARCDATA
+
+ARCDATA
+AMIGA_CLK_IDE_R_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+AMIGA_CLK_IDE_W_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+AMIGA_CLK_ROM_OE_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+AS_AS_AMIGA_delay:
+CELL_RISE(scalar) {
+  VALUES("18.9");
+}
+CELL_FALL(scalar) {
+  VALUES("18.9");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<8>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<9>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<10>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<11>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<12>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<13>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<14>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<15>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_AS_AMIGA_delay:
+CELL_RISE(scalar) {
+  VALUES("13.5");
+}
+CELL_FALL(scalar) {
+  VALUES("13.5");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<3>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<4>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<5>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<6>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_D<7>_delay:
+CELL_RISE(scalar) {
+  VALUES("22.2");
+}
+CELL_FALL(scalar) {
+  VALUES("22.2");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_DTACK_delay:
+CELL_RISE(scalar) {
+  VALUES("14.5");
+}
+CELL_FALL(scalar) {
+  VALUES("14.5");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<10>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<11>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<2>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<3>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<4>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<5>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<6>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<7>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<8>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_ARAM<9>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_BA<0>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_BA<1>_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_CAS_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_LDQM_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_MEM_CS_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_MEM_WE_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_RAS_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+CLK50M_UDQM_delay:
+CELL_RISE(scalar) {
+  VALUES("5.8");
+}
+CELL_FALL(scalar) {
+  VALUES("5.8");
+}
+ENDARCDATA
+
+ARCDATA
+A<1>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<2>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<3>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<4>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<5>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<6>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+AS_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+AS_AMIGA_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+D<10>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+D<11>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+D<12>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+D<13>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+D<14>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+D<15>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+D<8>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+D<9>_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+IDE_OFF_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+RW_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+UDS_AMIGA_CLK_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<1>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<2>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<3>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<4>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<5>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<6>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+AS_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+AS_AMIGA_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+D<10>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+D<11>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+D<12>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+D<13>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+D<14>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+D<15>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+D<8>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+D<9>_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+IDE_OFF_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+RW_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+UDS_AMIGA_CLK_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+MEM_OFF_AS_setup:
+CONSTRAINT(scalar) {
+  VALUES("5.1");
+}
+ENDARCDATA
+
+ARCDATA
+MEM_OFF_AS_hold:
+CONSTRAINT(scalar) {
+  VALUES("1.4");
+}
+ENDARCDATA
+
+ARCDATA
+A<10>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<11>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<12>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<13>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<14>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<15>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<16>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<17>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<18>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<19>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.9");
+}
+ENDARCDATA
+
+ARCDATA
+A<1>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<20>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<21>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<22>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.9");
+}
+ENDARCDATA
+
+ARCDATA
+A<23>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<2>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<3>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<4>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<5>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<6>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<7>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<8>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<9>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+AS_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+AS_AMIGA_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+BERR_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+BGACK_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<0>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<10>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<11>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<12>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<13>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<14>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<15>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<1>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<2>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<3>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<4>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<5>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<6>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<7>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<8>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<9>_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+LDS_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+RESET_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("10.5");
+}
+ENDARCDATA
+
+ARCDATA
+RW_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+UDS_CLK50M_setup:
+CONSTRAINT(scalar) {
+  VALUES("9.5");
+}
+ENDARCDATA
+
+ARCDATA
+A<10>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<11>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<12>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<13>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<14>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<15>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<16>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<17>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<18>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<19>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4.4");
+}
+ENDARCDATA
+
+ARCDATA
+A<1>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<20>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<21>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<22>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4.4");
+}
+ENDARCDATA
+
+ARCDATA
+A<23>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+A<2>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<3>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<4>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<5>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<6>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<7>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<8>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+A<9>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+AS_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+AS_AMIGA_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+BERR_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+BGACK_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<0>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<10>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<11>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<12>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<13>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<14>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<15>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<1>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<2>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<3>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<4>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<5>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<6>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<7>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<8>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+DRAM<9>_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+LDS_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+RESET_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-4");
+}
+ENDARCDATA
+
+ARCDATA
+RW_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ARCDATA
+UDS_CLK50M_hold:
+CONSTRAINT(scalar) {
+  VALUES("-3");
+}
+ENDARCDATA
+
+ENDTIMINGDATA
+ENDMODELDATA
