@@ -112,7 +112,7 @@ architecture Behavioral of RAM_IDE_AUTOCONFIG is
 	signal CLK_A_D0 :  std_logic;
 	signal CLK_A_D1 :  std_logic;
 	signal NQ :  STD_LOGIC_VECTOR (2 downto 0);
-	signal RQ :  STD_LOGIC_VECTOR (9 downto 0);
+	signal RQ :  STD_LOGIC_VECTOR (10 downto 0);
 	signal CQ :  sdram_state_machine_type;
 	signal CQ_D :  sdram_state_machine_type;
    signal RAM_D: STD_LOGIC_VECTOR (15 downto 0);      
@@ -135,17 +135,9 @@ architecture Behavioral of RAM_IDE_AUTOCONFIG is
 	
 begin
 	
-	ADDRESS_DECODE: process(reset,CLK50M)
+	ADDRESS_DECODE: process(CLK50M)
 	begin
-		if	(reset = '0') then
-			autoconfig <='0';
-			ide <='0';
-			ram <='0';
-			TRANSFER_IN_PROGRES <= '0';
-			AUTOCONFIG_IN_PROGRES <= '0';
-			DS <= '0';
-			AS_D <='1';
-		elsif(rising_edge(CLK50M))then
+		if(rising_edge(CLK50M))then
 			if(AS='0' or (BGACK = '0' and AS_AMIGA = '0'))then
 				AS_D <='0';
 			else
@@ -184,7 +176,7 @@ begin
 					ide <='0';
 				end if;
 				
-				if(SHUT_UP(0) = '0' and(
+				if(MEM_OFF  = '0' and(
 					A(23 downto 21) = "001" 
 					or A(23 downto 21) = "010" 
 					or A(23 downto 21) = "011" 
@@ -203,16 +195,16 @@ begin
 	
 	--ide
 		-- this is the clocked process
-	ide_rw_gen: process (reset, AMIGA_CLK)
+	ide_rw_gen: process (AMIGA_CLK)
 	begin
 	
-		if	(reset = '0') then
-			IDE_R_S		<= '1';
-			IDE_W_S		<= '1';
-			ROM_OE_S		<= '1';
-			IDE_ENABLE 	<= '1';
-		elsif rising_edge(AMIGA_CLK) then
-			if((AS='0' or AS_AMIGA = '0') and ide='1')then
+		if rising_edge(AMIGA_CLK) then
+			if	(reset = '0') then
+				IDE_R_S		<= '1';
+				IDE_W_S		<= '1';
+				ROM_OE_S		<= '1';
+				IDE_ENABLE 	<= '1';
+			elsif((AS='0' or AS_AMIGA = '0') and ide='1')then
 				if(RW='0')then
 					--the write goes to the hdd!
 					IDE_ENABLE  <= '0'; -- enable IDE on first read
@@ -256,20 +248,20 @@ begin
 
 	autoconfig_proc: process (reset, AMIGA_CLK)
 	begin
-		if	reset = '0' then
-			-- reset active ...
-			AUTO_CONFIG_DONE_CYCLE	<="00";
-			Dout1<="1111";
-			--Dout2<="1111";
-			SHUT_UP	<="11";
-			IDE_BASEADR<=x"FF";
-		elsif rising_edge(AMIGA_CLK) then -- no reset, so wait for rising edge of the clock		
-			if(autoconfig= '1' and AS='0') then
+		if rising_edge(AMIGA_CLK) then -- no reset, so wait for rising edge of the clock		
+			if	reset = '0' then
+				-- reset active ...
+				AUTO_CONFIG_DONE_CYCLE	<="00";
+				Dout1<="1111";
+				--Dout2<="1111";
+				SHUT_UP	<="11";
+				IDE_BASEADR<=x"FF";
+			elsif(autoconfig= '1' and AS='0') then
 				if(RW='1') then
 					if(AUTO_CONFIG_DONE(0)='0')then
 						case A(6 downto 1) is
 							when "000000"	=> 
-								Dout1 <= 	"1110" ; --ZII, NO System-Memory, no ROM
+								Dout1 <= 	"1110" ; --ZII, System-Memory, no ROM
 							when "000001"	=> Dout1 <=	"0000" ; --one Card, 4MB = 111
 							--when "0000100"	=> Dout1 <=	"1111" ; --ProductID high nibble : E->0001
 							when "000011"	=> Dout1 <=	"1101" ; --ProductID low nibble: F->0000
@@ -293,7 +285,7 @@ begin
 						end case;	
 					else
 						case A(6 downto 1) is
-							when "000000"	=> --Dout1 <= 	"1101" ; --ZII, no Memory,  ROM
+							when "000000"	=> 
 								if(IDE_OFF ='0') then
 									Dout1 <= 	"1101" ; --ZII, no System-Memory, ROM
 								else
@@ -353,35 +345,19 @@ begin
 	--ram state machine
 	-- Register Section
 
-   process (CLK50M, RESET) begin
-      if RESET='0' then
-			UDQM  <= '1';
-			LDQM  <= '1';
-			MEM_CS <= '1';
-			MEM_WE <= '1';
-			CAS <= '1';
-			RAS <= '1';
-			BA  <= "11";
-			ARAM <= "000000000000";
-			CQ	<= powerup;
-			NQ  <= "000";
-			REFRESH <='0';
-			DTACK_S <='1';
-			RQ<=	"0000000000";
-			CLK_A_D0 <='0';
-			CLK_A_D1 <='0';
-      elsif rising_edge(CLK50M) then
+   process (CLK50M) begin
+      if rising_edge(CLK50M) then
 			if(CLRREFC ='1')then
 				REFRESH <= '0';
-			elsif(RQ >= "0001011110") then
+			elsif(RQ >= "00001011110") then
 				REFRESH <= '1';
 			end if;
 
 			CLK_A_D0 <= AMIGA_CLK;
 			CLK_A_D1 <= CLK_A_D0;
 			if CLRREFC='1' then
-				RQ<=	"0000000000";
-			elsif(CLK_A_D1='1' and CLK_A_D0 ='0') then --count on falling edges
+				RQ<=	"00000000000";
+			elsif(CLK_A_D1='1' and CLK_A_D0 ='0' and RQ <"11111111111") then --count on falling edges
 				RQ <= RQ +1;
 			end if;
 			
@@ -410,27 +386,25 @@ begin
 			CAS <= CAS_D;
 			RAS <= RAS_D;
 						
-			--if (	CQ_D = powerup or
-			--		CQ_D = init_precharge or
-			--		CQ_D = init_precharge_commit or
-			--		CQ_D = init_refresh or
-			--		CQ_D = init_wait or
-			--		CQ_D = start_state or
-			--		CQ_D = precharge or
-			--		CQ_D = end_cycle) then
-			--	BA <= "11";
-			BA <= A(22 downto 21);
+			if (	CQ_D = init_opcode ) then
+				BA <= "00";
+			else
+				BA <= A(22 downto 21);
+			end if;
 
 			ARAM <= ARAM_D;			 
-			CQ	<= CQ_D;
-      end if;
+			
+	      if reset='0' then
+				CQ	<= powerup;
+			else
+				CQ	<= CQ_D;
+			end if;
+		end if;
    end process;
 
    --process to latch the data from the ram
    process (CLK50M, RESET) begin
-      if RESET='0' then
-			RAM_D <="1111111111111111";
-      elsif falling_edge(CLK50M) then
+      if falling_edge(CLK50M) then
 			if(  CQ = precharge and RW='1')then
 				RAM_D <=DRAM;
 			end if;
@@ -438,7 +412,7 @@ begin
    end process;
 
 	D	<=	RAM_D 						when RW='1' and TRANSFER_IN_PROGRES ='1' else
-			Dout1	& "111111111111" 	when RW='1' and AS ='0' and autoconfig ='1' else
+			Dout1	& "111111111111" 	when RW='1' and AUTOCONFIG_IN_PROGRES ='1' else
 			"ZZZZZZZZZZZZZZZZ";
 
 	DRAM <= 	D when RW='0' and AS ='0' else
@@ -458,13 +432,14 @@ begin
 					'1' when (ram = '1' or autoconfig ='1') and DMAREQ='1' else
 					AS;
 	DTACK <= DTACK_S when TRANSFER_IN_PROGRES ='1' or AUTOCONFIG_IN_PROGRES ='1' else 'Z';
+	
+	--AS_AMIGA <= AS;
 	--DTACK <= 'Z';
 
 
 	CLRREFC <= '1' when 	CQ = init_precharge_commit
 								or CQ = init_opcode
-								or CQ = refresh_start 
-								or RESET ='0'
+								or CQ = refresh_start 								
 						else '0';
 
 
@@ -499,7 +474,7 @@ begin
 		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
 		 ARAM_D <= "000000000000";
-		 if(RQ = "1111111111")then --wait 200us
+		 if(RQ = "11111111111")then --wait 200us
 			CQ_D <= init_precharge;
 		 else
 			CQ_D <= powerup;
@@ -523,7 +498,7 @@ begin
 		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
 		 ARAM_D <= "000000000000";
-		 if (NQ >= "001") then
+		 if (NQ >= "010") then
 		    CQ_D <= init_opcode;  
 		 else
 		    CQ_D <= init_precharge_commit;
@@ -665,8 +640,6 @@ begin
 			UDQ_D <= UDS;
 			LDQ_D <= LDS;
 		 end if;
-		 --UDQ_D <= '1';
-		 --LDQ_D <= '1';
 		 CE_D <= '1';
 		 MEM_WE_D <= '1';
 		 CAS_D <= '1';
@@ -682,8 +655,6 @@ begin
 			UDQ_D <= UDS;
 			LDQ_D <= LDS;
 		 end if;		
-		 --UDQ_D <= '1';
-		 --LDQ_D <= '1';
 		 CE_D <= '1';
 		 MEM_WE_D <= '1';
 		 CAS_D <= '1';

@@ -15,10 +15,7 @@
   <version xil_pn:ise_version="14.6" xil_pn:schema_version="2"/>
 
   <files>
-    <file xil_pn:name="RAM-IDE-AUTOCONFIG.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="3"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="1"/>
-    </file>
+    <file xil_pn:name="RAM-IDE-AUTOCONFIG.vhd" xil_pn:type="FILE_VHDL"/>
     <file xil_pn:name="pinlist.ucf" xil_pn:type="FILE_UCF">
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
@@ -83,7 +80,7 @@
     <property xil_pn:name="Bring Out Global Set/Reset Net as a Port" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Bus Delimiter" xil_pn:value="&lt;>" xil_pn:valueState="default"/>
     <property xil_pn:name="Case" xil_pn:value="Maintain" xil_pn:valueState="default"/>
-    <property xil_pn:name="Case Implementation Style" xil_pn:value="None" xil_pn:valueState="default"/>
+    <property xil_pn:name="Case Implementation Style" xil_pn:value="Parallel" xil_pn:valueState="non-default" xil_pn:x_locked="true"/>
     <property xil_pn:name="Clock Enable" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Collapsing Input Limit (2-54)" xil_pn:value="54" xil_pn:valueState="default"/>
     <property xil_pn:name="Collapsing Pterm Limit (1-90)" xil_pn:value="25" xil_pn:valueState="default"/>
@@ -101,7 +98,7 @@
     <property xil_pn:name="Do Not Escape Signal and Instance Names in Netlist" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Enable Hardware Co-Simulation" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Enable Message Filtering" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Equivalent Register Removal XST" xil_pn:value="true" xil_pn:valueState="default"/>
+    <property xil_pn:name="Equivalent Register Removal XST" xil_pn:value="true" xil_pn:valueState="default" xil_pn:x_locked="true"/>
     <property xil_pn:name="Exhaustive Fit Mode" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="FSM Encoding Algorithm" xil_pn:value="Compact" xil_pn:valueState="non-default" xil_pn:x_locked="true"/>
     <property xil_pn:name="Filter Files From Compile Order" xil_pn:value="true" xil_pn:valueState="default"/>
@@ -119,16 +116,16 @@
     <property xil_pn:name="I/O Pin Termination" xil_pn:value="Keeper" xil_pn:valueState="default"/>
     <property xil_pn:name="ISim UUT Instance Name" xil_pn:value="UUT" xil_pn:valueState="default"/>
     <property xil_pn:name="Implementation Template" xil_pn:value="Optimize Balance" xil_pn:valueState="default"/>
-    <property xil_pn:name="Implementation Top" xil_pn:value="Architecture|RAM_IDE_AUTOCONFIG|Behavioral" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Implementation Top" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Implementation Top File" xil_pn:value="RAM-IDE-AUTOCONFIG.vhd" xil_pn:valueState="non-default"/>
-    <property xil_pn:name="Implementation Top Instance Path" xil_pn:value="/RAM_IDE_AUTOCONFIG" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Implementation Top Instance Path" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Include 'uselib Directive in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Include SIMPRIM Models in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Include sdf_annotate task in Verilog File" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Incremental Compilation" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Instantiation Template Target Language Xps" xil_pn:value="VHDL" xil_pn:valueState="default"/>
     <property xil_pn:name="Keep Hierarchy" xil_pn:value="No" xil_pn:valueState="default"/>
-    <property xil_pn:name="Keep Hierarchy CPLD" xil_pn:value="Yes" xil_pn:valueState="default"/>
+    <property xil_pn:name="Keep Hierarchy CPLD" xil_pn:value="Yes" xil_pn:valueState="default" xil_pn:x_locked="true"/>
     <property xil_pn:name="Language" xil_pn:value="VHDL" xil_pn:valueState="default"/>
     <property xil_pn:name="Last Applied Goal" xil_pn:value="Balanced2" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Last Applied Strategy" xil_pn:value="cdtvram;C:/Users/Matze/Amiga/Hardwarehacks/CDTV-RAM-IDE/Logic/CDTV-RAM-IDE/cdtvram.xds" xil_pn:valueState="non-default"/>
@@ -144,8 +141,8 @@
     <property xil_pn:name="Maximum Signal Name Length" xil_pn:value="20" xil_pn:valueState="default"/>
     <property xil_pn:name="Mux Extraction" xil_pn:value="Yes" xil_pn:valueState="default"/>
     <property xil_pn:name="Netlist Hierarchy" xil_pn:value="As Optimized" xil_pn:valueState="default"/>
-    <property xil_pn:name="Optimization Effort" xil_pn:value="Normal" xil_pn:valueState="default"/>
-    <property xil_pn:name="Optimization Goal" xil_pn:value="Speed" xil_pn:valueState="default"/>
+    <property xil_pn:name="Optimization Effort" xil_pn:value="High" xil_pn:valueState="non-default" xil_pn:x_locked="true"/>
+    <property xil_pn:name="Optimization Goal" xil_pn:value="Area" xil_pn:valueState="non-default" xil_pn:x_locked="true"/>
     <property xil_pn:name="Other CPLD Fitter Command Line Options" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Other Compiler Options" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Other Compiler Options Fit" xil_pn:value="" xil_pn:valueState="default"/>
@@ -159,26 +156,26 @@
     <property xil_pn:name="Other XPWR Command Line Options" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Other XST Command Line Options" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Output Extended Identifiers" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Output File Name" xil_pn:value="RAM_IDE_AUTOCONFIG" xil_pn:valueState="default"/>
+    <property xil_pn:name="Output File Name" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Output Slew Rate" xil_pn:value="Fast" xil_pn:valueState="default"/>
     <property xil_pn:name="Overwrite Compiled Libraries" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Package" xil_pn:value="TQ144" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Port to be used" xil_pn:value="Auto - default" xil_pn:valueState="default"/>
-    <property xil_pn:name="Post Place &amp; Route Simulation Model Name" xil_pn:value="RAM_IDE_AUTOCONFIG_timesim.vhd" xil_pn:valueState="default"/>
+    <property xil_pn:name="Post Place &amp; Route Simulation Model Name" xil_pn:value="_timesim.vhd" xil_pn:valueState="default"/>
     <property xil_pn:name="Preferred Language" xil_pn:value="VHDL" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Preserve Unused Inputs" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Produce Verbose Report" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Property Specification in Project File" xil_pn:value="Store all values" xil_pn:valueState="default"/>
     <property xil_pn:name="Rename Design Instance in Testbench File to" xil_pn:value="UUT" xil_pn:valueState="default"/>
     <property xil_pn:name="Rename Top Level Architecture To" xil_pn:value="Structure" xil_pn:valueState="default"/>
-    <property xil_pn:name="Rename Top Level Entity to" xil_pn:value="RAM_IDE_AUTOCONFIG" xil_pn:valueState="default"/>
+    <property xil_pn:name="Rename Top Level Entity to" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Rename Top Level Module To" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Reset On Configuration Pulse Width" xil_pn:value="100" xil_pn:valueState="default"/>
-    <property xil_pn:name="Resource Sharing" xil_pn:value="true" xil_pn:valueState="default"/>
+    <property xil_pn:name="Resource Sharing" xil_pn:value="true" xil_pn:valueState="default" xil_pn:x_locked="true"/>
     <property xil_pn:name="Retain Hierarchy" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Run for Specified Time" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Run for Specified Time Par" xil_pn:value="true" xil_pn:valueState="default"/>
-    <property xil_pn:name="Safe Implementation" xil_pn:value="No" xil_pn:valueState="default"/>
+    <property xil_pn:name="Safe Implementation" xil_pn:value="Yes" xil_pn:valueState="non-default" xil_pn:x_locked="true"/>
     <property xil_pn:name="Selected Module Instance Name" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Selected Simulation Root Source Node Behavioral" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Selected Simulation Root Source Node Post-Route" xil_pn:value="" xil_pn:valueState="default"/>
@@ -220,7 +217,7 @@
     <property xil_pn:name="Verilog Macros" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="WYSIWYG" xil_pn:value="None" xil_pn:valueState="default"/>
     <property xil_pn:name="Working Directory" xil_pn:value="." xil_pn:valueState="non-default"/>
-    <property xil_pn:name="XOR Preserve" xil_pn:value="true" xil_pn:valueState="default"/>
+    <property xil_pn:name="XOR Preserve" xil_pn:value="true" xil_pn:valueState="default" xil_pn:x_locked="true"/>
     <!--                                                                                  -->
     <!-- The following properties are for internal use only. These should not be modified.-->
     <!--                                                                                  -->
