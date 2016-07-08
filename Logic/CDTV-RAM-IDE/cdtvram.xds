@@ -8,13 +8,15 @@
   <Properties>
     <property name="Synthesize - XST:Optimization Goal" value="Area"/>
     <property name="Synthesize - XST:Optimization Effort" value="High"/>
-    <property name="Synthesize - XST:Keep Hierarchy" value="Yes"/>
     <property name="Synthesize - XST:FSM Encoding Algorithm" value="Compact"/>
     <property name="Synthesize - XST:Safe Implementation" value="Yes"/>
-    <property name="Synthesize - XST:Case Implementation Style" value="Parallel"/>
+    <property name="Synthesize - XST:Case Implementation Style" value="None"/>
     <property name="Synthesize - XST:Resource Sharing" value="true"/>
     <property name="Synthesize - XST:Equivalent Register Removal" value="true"/>
     <property name="Synthesize - XST:XOR Preserve" value="true"/>
+    <property name="Fit:Implementation Template" value="Optimize Density"/>
+    <property name="Fit:I/O Pin Termination" value="Float"/>
+    <property name="Fit:Logic Optimization" value="Density"/>
   </Properties>
 
 </DesignStrategy>
