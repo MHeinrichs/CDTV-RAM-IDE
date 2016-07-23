@@ -111,8 +111,9 @@ architecture Behavioral of RAM_IDE_AUTOCONFIG is
 				);
 	signal CLK_A_D0 :  std_logic;
 	signal CLK_A_D1 :  std_logic;
-	signal NQ :  STD_LOGIC_VECTOR (2 downto 0);
-	signal RQ :  STD_LOGIC_VECTOR (10 downto 0);
+	signal INIT_RC  :  STD_LOGIC_VECTOR (12 downto 0);
+	signal NQ :  STD_LOGIC_VECTOR (1 downto 0);
+	signal RQ :  STD_LOGIC_VECTOR (3 downto 0);
 	signal CQ :  sdram_state_machine_type;
 	signal CQ_D :  sdram_state_machine_type;
    signal RAM_D: STD_LOGIC_VECTOR (15 downto 0);      
@@ -172,7 +173,9 @@ begin
 					ide <='0';
 				end if;
 				
-				if(SHUT_UP(0)  = '0' and(
+				if(SHUT_UP(0)  = '0' and
+					AUTO_CONFIG_DONE(0)  = '1'
+					and(
 					A(23 downto 21) = "001" 
 					or A(23 downto 21) = "010" 
 					or A(23 downto 21) = "011" 
@@ -345,15 +348,15 @@ begin
       if rising_edge(CLK50M) then
 			if(CLRREFC ='1')then
 				REFRESH <= '0';
-			elsif(RQ >= "00001011110") then
+			elsif(RQ >= "1111") then --15600ns = 111 7Mhz-Clocks = 10111 - 8 clocks safety margin = 10000!
 				REFRESH <= '1';
 			end if;
 
 			CLK_A_D0 <= AMIGA_CLK;
 			CLK_A_D1 <= CLK_A_D0;
 			if CLRREFC='1' then
-				RQ<=	"00000000000";
-			elsif(CLK_A_D1='1' and CLK_A_D0 ='0' and RQ <"11111111111") then --count on falling edges
+				RQ<=	"0000";
+			elsif(CLK_A_D1='1' and CLK_A_D0 ='0' and RQ <"1111") then --count on falling edges
 				RQ <= RQ +1;
 			end if;
 			
@@ -364,9 +367,11 @@ begin
 				CQ = init_opcode_wait or
 				CQ = refresh_wait)
 			then
-				NQ <= NQ +1;
+				if(NQ < "11")then
+					NQ <= NQ +1;
+				end if;
 			else 
-				NQ  <= "000";
+				NQ  <= "00";
 			end if;
 		
 			UDQM <= UDQ_D;
@@ -383,7 +388,7 @@ begin
 			CAS <= CAS_D;
 			RAS <= RAS_D;
 						
-			if (	CQ_D = init_opcode or reset ='0' ) then
+			if (	CQ_D = init_opcode) then
 				BA <= "00";
 			else
 				BA <= A(22 downto 21);
@@ -393,8 +398,12 @@ begin
 			
 	      if reset='0' then
 				CQ	<= powerup;
+				INIT_RC <= "0000000000000";
 			else
 				CQ	<= CQ_D;
+				if(CQ = init_refresh) then
+					INIT_RC <= INIT_RC+1;
+				end if;
 			end if;
 		end if;
    end process;
@@ -434,9 +443,10 @@ begin
 	--DTACK <= 'Z';
 
 
-	CLRREFC <= '1' when 	CQ = init_precharge_commit
-								or CQ = init_opcode
-								or CQ = refresh_start 								
+	CLRREFC <= '1' when 	--CQ = init_precharge_commit
+								--or CQ = init_opcode
+								CQ = init_refresh or 
+								CQ = refresh_start 								
 						else '0';
 
 
@@ -471,7 +481,7 @@ begin
 		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
 		 ARAM_D <= "000000000000";
-		 if(RQ = "11111111111")then --wait 200us
+		 if(AUTO_CONFIG_DONE(0)='1')then --wait until autoconfig is finished. this makes a nice delay!
 			CQ_D <= init_precharge;
 		 else
 			CQ_D <= powerup;
@@ -495,7 +505,7 @@ begin
 		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
 		 ARAM_D <= "000000000000";
-		 if (NQ >= "010") then
+		 if (NQ >= "10") then
 		    CQ_D <= init_opcode;  
 		 else
 		    CQ_D <= init_precharge_commit;
@@ -519,7 +529,7 @@ begin
 		 RAS_D <= '1';
 		 ARAM_D <= "000000000000";
 		 ENACLK_PRE <= '1';
-		 if (NQ >= "010") then
+		 if (NQ >= "10") then
 		    CQ_D <= init_refresh;   --1st refresh
 		 else
 		    CQ_D <= init_opcode_wait;
@@ -543,8 +553,14 @@ begin
 		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
 		 ARAM_D <= "000000000000";
-		 if (	NQ >= "010") then    --wait 60ns here
-		    CQ_D <= refresh_start; --2nd refresh completes initialzation
+		 if (	NQ >= "10") then    --wait 60ns here
+			if(INIT_RC = "1111111111111") then
+				CQ_D <= refresh_start; --last refresh completes initialzation
+			elsif(REFRESH='1') then
+				CQ_D <= init_refresh;
+			else
+				CQ_D <= init_wait;
+			end if;
 		 else
 		    CQ_D <= init_wait;
 		 end if;
@@ -585,7 +601,7 @@ begin
 		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
 		 ARAM_D <= "000000000000";
-		 if (NQ >= "010") then			--wait 60ns here
+		 if (NQ >= "10") then			--wait 60ns here
 			 if (TRANSFER = '1') then
 				CQ_D <= start_ras;
 			 else
