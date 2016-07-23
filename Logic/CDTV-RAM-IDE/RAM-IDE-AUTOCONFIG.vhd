@@ -111,7 +111,7 @@ architecture Behavioral of RAM_IDE_AUTOCONFIG is
 				);
 	signal CLK_A_D0 :  std_logic;
 	signal CLK_A_D1 :  std_logic;
-	signal INIT_RC  :  STD_LOGIC_VECTOR (12 downto 0);
+	signal INIT_RC  :  STD_LOGIC_VECTOR (11 downto 0);
 	signal NQ :  STD_LOGIC_VECTOR (1 downto 0);
 	signal RQ :  STD_LOGIC_VECTOR (3 downto 0);
 	signal CQ :  sdram_state_machine_type;
@@ -398,7 +398,7 @@ begin
 			
 	      if reset='0' then
 				CQ	<= powerup;
-				INIT_RC <= "0000000000000";
+				INIT_RC <= x"000";
 			else
 				CQ	<= CQ_D;
 				if(CQ = init_refresh) then
@@ -553,17 +553,17 @@ begin
 		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
 		 ARAM_D <= "000000000000";
-		 if (	NQ >= "10") then    --wait 60ns here
-			if(INIT_RC = "1111111111111") then
+		 --if (	NQ >= "10") then    --wait 60ns here
+			if(INIT_RC = x"FFF") then
 				CQ_D <= refresh_start; --last refresh completes initialzation
 			elsif(REFRESH='1') then
 				CQ_D <= init_refresh;
 			else
 				CQ_D <= init_wait;
 			end if;
-		 else
-		    CQ_D <= init_wait;
-		 end if;
+		 --else
+		 --   CQ_D <= init_wait;
+		 --end if;
 
       when start_state =>
 		 UDQ_D <= '1';
