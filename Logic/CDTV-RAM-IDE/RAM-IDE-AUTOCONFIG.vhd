@@ -70,9 +70,9 @@ entity RAM_IDE_AUTOCONFIG is
 end RAM_IDE_AUTOCONFIG;
 
 architecture Behavioral of RAM_IDE_AUTOCONFIG is
-	SIGNAL ide: STD_LOGIC;
-	SIGNAL ram: STD_LOGIC;
-	SIGNAL autoconfig: STD_LOGIC;
+	SIGNAL ide: STD_LOGIC:= '0';
+	SIGNAL ram: STD_LOGIC:= '0';
+	SIGNAL autoconfig: STD_LOGIC:= '0';
 	signal Dout1:STD_LOGIC_VECTOR(3 downto 0);
 	signal AUTO_CONFIG_DONE:STD_LOGIC_VECTOR(1 downto 0);
 	signal AUTO_CONFIG_DONE_CYCLE:STD_LOGIC_VECTOR(1 downto 0);
@@ -85,11 +85,10 @@ architecture Behavioral of RAM_IDE_AUTOCONFIG is
 	signal DTACK_S:STD_LOGIC:= '1';
 	signal TRANSFER_IN_PROGRES:STD_LOGIC:= '1';
 	signal AUTOCONFIG_IN_PROGRES:STD_LOGIC:= '1';
-	
-	   signal 
-	 AS_D, RAS_D, CAS_D, MEM_WE_D, 
-	 CE_D, LDQ_D, UDQ_D, REFRESH, CLRREFC, TRANSFER: std_logic;
-   constant MAX_RAM_ADRESS : integer := 25;
+   signal AS_D: std_logic:= '1';
+	signal REFRESH: std_logic:= '1';
+	signal CLRREFC: std_logic:= '1';
+	Signal TRANSFER: std_logic:= '1';
 	TYPE sdram_state_machine_type IS (
 				powerup, 					--000000
 				init_precharge,			--000001 
@@ -109,15 +108,22 @@ architecture Behavioral of RAM_IDE_AUTOCONFIG is
 				precharge,			--110011
 				precharge_wait			--001001
 				);
+	TYPE sdram_control IS (
+				c_nop,
+				c_ras,
+				c_cas,
+				c_precharge,
+				c_refresh,
+				c_opt_code
+	);
 	signal CLK_A_D0 :  std_logic;
 	signal CLK_A_D1 :  std_logic;
-	signal INIT_RC  :  STD_LOGIC_VECTOR (11 downto 0);
 	signal NQ :  STD_LOGIC_VECTOR (1 downto 0);
 	signal RQ :  STD_LOGIC_VECTOR (3 downto 0);
 	signal CQ :  sdram_state_machine_type;
 	signal CQ_D :  sdram_state_machine_type;
+	signal SDRAM_OP :  sdram_control;
    signal RAM_D: STD_LOGIC_VECTOR (15 downto 0);      
-   signal ARAM_D: STD_LOGIC_VECTOR (11 downto 0);      
    signal ARAM_LOW: STD_LOGIC_VECTOR (11 downto 0);      
    signal ARAM_HIGH: STD_LOGIC_VECTOR (11 downto 0);      
    signal ARAM_PRECHARGE: STD_LOGIC_VECTOR (11 downto 0);   
@@ -341,8 +347,7 @@ begin
 		end if;
 	end process autoconfig_proc; --- that's all
 
-	--ram state machine
-	-- Register Section
+	-- ram register Section
 
    process (CLK50M) begin
       if rising_edge(CLK50M) then
@@ -373,37 +378,79 @@ begin
 			else 
 				NQ  <= "00";
 			end if;
-		
-			UDQM <= UDQ_D;
-			LDQM <= LDQ_D;
-			
+					
 			if(AS='1')then
 				DTACK_S <='1';
 			elsif( CQ = start_ras or autoconfig ='1') then
 				DTACK_S <='0';
 			end if;
-
-			MEM_CS <= CE_D;
-			MEM_WE <= MEM_WE_D;
-			CAS <= CAS_D;
-			RAS <= RAS_D;
-						
-			if (	CQ_D = init_opcode) then
-				BA <= "00";
-			else
-				BA <= A(22 downto 21);
-			end if;
-
-			ARAM <= ARAM_D;			 
 			
+			if(	CQ_D = start_cas or
+					CQ_D = commit_cas or
+					CQ_D = data_wait 
+				)then
+				 if(RW='1') then
+					UDQM <= '0';
+					LDQM <= '0';
+				 else
+					UDQM <= UDS;
+					LDQM <= LDS;
+				 end if;
+			else
+					UDQM <= '1';
+					LDQM <= '1';
+			end if;
+			
+			
+			case SDRAM_OP is
+			when c_nop=>
+				MEM_CS <= '1';
+				MEM_WE <= '1';
+				CAS <= '1';
+				RAS <= '1';
+				ARAM <= "000000000000";
+				BA <= A(22 downto 21);
+			when c_ras=>
+				MEM_CS <= '0';
+				MEM_WE <= '1';
+				CAS <= '1';
+				RAS <= '0';
+				ARAM <= ARAM_HIGH;
+				BA <= A(22 downto 21);
+			when c_cas=>
+				MEM_CS <= '0';
+				MEM_WE <= RW;
+				CAS <= '0';
+				RAS <= '1';
+				ARAM <= ARAM_LOW;
+				BA <= A(22 downto 21);
+			when c_precharge=>
+				MEM_CS <= '0';
+				MEM_WE <= '0';
+				CAS <= '1';
+				RAS <= '0';
+				ARAM <= ARAM_PRECHARGE;
+				BA <= A(22 downto 21);
+			when c_refresh=>
+				MEM_CS <= '0';
+				MEM_WE <= '1';
+				CAS <= '0';
+				RAS <= '0';
+				ARAM <= "000000000000";								
+				BA <= A(22 downto 21);
+			when c_opt_code=>
+				MEM_CS <= '0';
+				MEM_WE <= '0';
+				CAS <= '0';
+				RAS <= '0';
+				ARAM <= ARAM_OPTCODE;			
+				BA <= "00";
+			end case;
+									
 	      if reset='0' then
 				CQ	<= powerup;
-				INIT_RC <= x"000";
 			else
 				CQ	<= CQ_D;
-				if(CQ = init_refresh) then
-					INIT_RC <= INIT_RC+1;
-				end if;
 			end if;
 		end if;
    end process;
@@ -417,13 +464,6 @@ begin
      end if;
    end process;
 
-	D	<=	RAM_D 						when RW='1' and TRANSFER_IN_PROGRES ='1' else
-			Dout1	& "111111111111" 	when RW='1' and AUTOCONFIG_IN_PROGRES ='1' else
-			"ZZZZZZZZZZZZZZZZ";
-
-	DRAM <= 	D when RW='0' and AS ='0' else
-				"ZZZZZZZZZZZZZZZZ";
-				
    dma_proc: process (BGACK,AS) begin
 		if(BGACK='1')then
 			DMAREQ <= '1';
@@ -431,8 +471,25 @@ begin
 			DMAREQ <= BGACK;
 		end if;
 	end process;
-				
-				
+
+	--signal assignment
+	D	<=	RAM_D 						when RW='1' and TRANSFER_IN_PROGRES ='1' else
+			Dout1	& "111111111111" 	when RW='1' and AUTOCONFIG_IN_PROGRES ='1' else
+			"ZZZZZZZZZZZZZZZZ";
+
+	DRAM <= 	D when RW='0' and AS ='0' else
+				"ZZZZZZZZZZZZZZZZ";
+								
+	IDE_W <=	IDE_W_S;
+	IDE_R <=	IDE_R_S;
+	IDE_CS(0)<= not(A(12));			
+	IDE_CS(1)<= not(A(13));
+	IDE_A(0)	<= A(9);
+	IDE_A(1)	<= A(10);
+	IDE_A(2)	<= A(11);
+	ROM_BANK	<= A(19 downto 16);
+	ROM_WE	<= '1';
+	ROM_OE	<= ROM_OE_S;				
 
 	AS_AMIGA <= 'Z' when DMAREQ = '0' else
 					'1' when (ram = '1' or autoconfig ='1') and DMAREQ='1' else
@@ -443,9 +500,7 @@ begin
 	--DTACK <= 'Z';
 
 
-	CLRREFC <= '1' when 	--CQ = init_precharge_commit
-								--or CQ = init_opcode
-								CQ = init_refresh or 
+	CLRREFC <= '1' when 	CQ = init_refresh or 
 								CQ = refresh_start 								
 						else '0';
 
@@ -466,115 +521,66 @@ begin
 	ARAM_PRECHARGE <= "010000000000";
 	ARAM_OPTCODE <= "001000100000";
 	
-
-   process (DS, CQ, RQ, REFRESH, TRANSFER, A, NQ, RW, UDS, LDS, ARAM_LOW, ARAM_HIGH)
+	-- ram state machine
+   process (DS, CQ, REFRESH, TRANSFER, NQ,AUTO_CONFIG_DONE)
    begin
       
-
       case CQ is
+
       when powerup =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '1';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
-		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
+		 ENACLK_PRE <= '1';		 
+		 SDRAM_OP<= c_nop;
 		 if(AUTO_CONFIG_DONE(0)='1')then --wait until autoconfig is finished. this makes a nice delay!
 			CQ_D <= init_precharge;
 		 else
 			CQ_D <= powerup;
 		 end if;
+
       when init_precharge =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '0';
-		 MEM_WE_D <= '0';
-		 CAS_D <= '1';
-		 RAS_D <= '0';
-		 ARAM_D <= ARAM_PRECHARGE;
 		 ENACLK_PRE <= '1';
+		 SDRAM_OP<= c_precharge;
 		 CQ_D <= init_precharge_commit;
+
       when init_precharge_commit =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '1';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
+		 SDRAM_OP<= c_nop;
 		 if (NQ >= "10") then
 		    CQ_D <= init_opcode;  
 		 else
 		    CQ_D <= init_precharge_commit;
 		 end if;
+
       when init_opcode =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '0';
-		 MEM_WE_D <= '0';
-		 CAS_D <= '0';
-		 RAS_D <= '0';
-		 ARAM_D <= ARAM_OPTCODE;
 		 ENACLK_PRE <= '1';
+		 SDRAM_OP <= c_opt_code;
 		 CQ_D <= init_opcode_wait;
+
       when init_opcode_wait =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '1';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
-		 ARAM_D <= "000000000000";
 		 ENACLK_PRE <= '1';
+		 SDRAM_OP<= c_nop;
 		 if (NQ >= "10") then
 		    CQ_D <= init_refresh;   --1st refresh
 		 else
 		    CQ_D <= init_opcode_wait;
 		 end if;
+
       when init_refresh =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '0';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '0';
-		 RAS_D <= '0';
 		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
+		 SDRAM_OP<= c_refresh;
 		 CQ_D <= init_wait;
+
       when init_wait =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '1';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
-		 --if (	NQ >= "10") then    --wait 60ns here
-			if(INIT_RC = x"FFF") then
-				CQ_D <= refresh_start; --last refresh completes initialzation
-			elsif(REFRESH='1') then
-				CQ_D <= init_refresh;
-			else
-				CQ_D <= init_wait;
-			end if;
-		 --else
-		 --   CQ_D <= init_wait;
-		 --end if;
+		 SDRAM_OP<= c_nop;
+		 if (	NQ >= "10") then    --wait 60ns here
+			CQ_D <= refresh_start; --last refresh completes initialzation
+		 else
+		    CQ_D <= init_wait;
+		 end if;
 
       when start_state =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '1';		 
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
-		 
+		 SDRAM_OP<= c_nop;		 
 		 if (TRANSFER = '1') then
 		    CQ_D <= start_ras;
 		 elsif (REFRESH='1') then
@@ -582,25 +588,15 @@ begin
 		 else
 		    CQ_D <= start_state;
 		 end if;
+		 
       when refresh_start =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '0';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '0';
-		 RAS_D <= '0';
 		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
+		 SDRAM_OP<= c_refresh;
 		 CQ_D <= refresh_wait;
+
       when refresh_wait =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '1';		 
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
+		 SDRAM_OP<= c_nop;
 		 if (NQ >= "10") then			--wait 60ns here
 			 if (TRANSFER = '1') then
 				CQ_D <= start_ras;
@@ -610,112 +606,49 @@ begin
 		 else
 		    CQ_D <= refresh_wait;
 		 end if;
+
       when start_ras =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '0';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '0';
-	 	 ARAM_D <= ARAM_HIGH;
 		 ENACLK_PRE <= '1';
+		 SDRAM_OP<= c_ras;
 		 CQ_D <= commit_ras;
+
 	  when commit_ras =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '1';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
+		 SDRAM_OP<= c_nop;
 		 if(DS='1')then  --wait here for a valid datastrobe on writes
 			CQ_D <= start_cas;
 		 else
 			CQ_D <= commit_ras;
 		 end if;
+
       when start_cas =>
-		 if(RW='1') then
-			UDQ_D <= '0';
-			LDQ_D <= '0';
-		 else
-			UDQ_D <= UDS;
-			LDQ_D <= LDS;
-		 end if;
-		 CE_D <= '0';
-		 MEM_WE_D <= RW;
-		 CAS_D <= '0';
-		 RAS_D <= '1';
-	 	 ARAM_D <= ARAM_LOW;
 		 ENACLK_PRE <= '1';
+		 SDRAM_OP<= c_cas;
 		 CQ_D <= commit_cas;
+
       when commit_cas =>
-		 if(RW='1') then
-			UDQ_D <= '0';
-			LDQ_D <= '0';
-		 else
-			UDQ_D <= UDS;
-			LDQ_D <= LDS;
-		 end if;
-		 CE_D <= '1';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
 		 ENACLK_PRE <= '1';
-		 ARAM_D <= "000000000000";
+		 SDRAM_OP<= c_nop;
  		 CQ_D <= data_wait;
+
       when data_wait =>
-		 if(RW='1') then
-			UDQ_D <= '0';
-			LDQ_D <= '0';
-		 else
-			UDQ_D <= UDS;
-			LDQ_D <= LDS;
-		 end if;		
-		 CE_D <= '1';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
-		 ARAM_D <= "000000000000";
 		 ENACLK_PRE <= '0'; --this holds the data if its not latched!
+		 SDRAM_OP<= c_nop;
 		 CQ_D <= precharge;
+
       when precharge =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '0';
-		 MEM_WE_D <= '0';
-		 CAS_D <= '1';
-		 RAS_D <= '0';
-	 	 ARAM_D <= ARAM_PRECHARGE;
 		 ENACLK_PRE <= '1';
+		 SDRAM_OP<= c_precharge;
 		 CQ_D <= precharge_wait;
+
       when precharge_wait =>
-		 UDQ_D <= '1';
-		 LDQ_D <= '1';
-		 CE_D <= '1';
-		 MEM_WE_D <= '1';
-		 CAS_D <= '1';
-		 RAS_D <= '1';
-		 ARAM_D <= "000000000000";
 		 ENACLK_PRE <= '1';
+		 SDRAM_OP<= c_nop;
 		 CQ_D <= start_state; 
 
 		end case;
 
    end process;
-
-
-	IDE_W <=	IDE_W_S;
-	IDE_R <=	IDE_R_S;
-	IDE_CS(0)<= not(A(12));			
-	IDE_CS(1)<= not(A(13));
-	IDE_A(0)	<= A(9);
-	IDE_A(1)	<= A(10);
-	IDE_A(2)	<= A(11);
-	ROM_BANK	<= A(19 downto 16);
-	ROM_WE	<= '1';
-	ROM_OE	<= ROM_OE_S;
-
 
 end Behavioral;
 
