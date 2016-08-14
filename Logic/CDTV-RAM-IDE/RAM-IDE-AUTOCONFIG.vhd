@@ -33,7 +33,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity RAM_IDE_AUTOCONFIG is
     Port ( A : in  STD_LOGIC_VECTOR (23 downto 1);
            D : inout  STD_LOGIC_VECTOR (15 downto 0);
-           AS : in  STD_LOGIC;
+           AS : inout  STD_LOGIC;
            AS_AMIGA : inout  STD_LOGIC;
            DTACK : out  STD_LOGIC;
            RW : in  STD_LOGIC;
@@ -145,11 +145,7 @@ begin
 	ADDRESS_DECODE: process(CLK50M)
 	begin
 		if(rising_edge(CLK50M))then
-			if(AS='0' or (BGACK = '0' and AS_AMIGA = '0'))then
-				AS_D <= '0';
-			else
-				AS_D <= '1';
-			end if;
+			AS_D <= AS;
 
 			if(AS_D='1') then
 				TRANSFER_IN_PROGRES <= '0';
@@ -209,7 +205,7 @@ begin
 				IDE_W_S		<= '1';
 				ROM_OE_S		<= '1';
 				IDE_ENABLE 	<= '1';
-			elsif((AS='0' or AS_AMIGA = '0') and ide='1')then
+			elsif(AS='0' and ide='1')then
 				if(RW='0')then
 					--the write goes to the hdd!
 					IDE_ENABLE  <= '0'; -- enable IDE on first read
@@ -381,7 +377,8 @@ begin
 					
 			if(AS='1')then
 				DTACK_S <='1';
-			elsif( CQ = start_ras or autoconfig ='1') then
+			elsif(-- CQ = start_ras or 
+					autoconfig ='1') then
 				DTACK_S <='0';
 			end if;
 			
@@ -465,10 +462,12 @@ begin
    end process;
 
    dma_proc: process (BGACK,AS) begin
-		if(BGACK='1')then
-			DMAREQ <= '1';
-		elsif rising_edge(AS) then
-			DMAREQ <= BGACK;
+		if(BGACK='0')then
+			DMAREQ <= '0';
+		elsif rising_edge(CLK50M) then
+			if(AS='1')then
+				DMAREQ <= BGACK;
+			end if;
 		end if;
 	end process;
 
@@ -492,9 +491,14 @@ begin
 	ROM_OE	<= ROM_OE_S;				
 
 	AS_AMIGA <= 'Z' when DMAREQ = '0' else
-					'1' when (ram = '1' or autoconfig ='1') and DMAREQ='1' else
+					'1' when autoconfig ='1' else --mask autoconfig!
 					AS;
-	DTACK <= DTACK_S when TRANSFER_IN_PROGRES ='1' or AUTOCONFIG_IN_PROGRES ='1' else 'Z';
+	AS			<= 'Z' when DMAREQ = '1' else 
+					AS_AMIGA;
+	
+	DTACK <= DTACK_S when --TRANSFER_IN_PROGRES ='1' or 
+								AUTOCONFIG_IN_PROGRES ='1' 
+						  else 'Z';
 	
 	--AS_AMIGA <= AS;
 	--DTACK <= 'Z';
