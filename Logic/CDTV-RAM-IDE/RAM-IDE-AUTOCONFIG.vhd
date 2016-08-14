@@ -486,7 +486,7 @@ begin
 	IDE_A(0)	<= A(9);
 	IDE_A(1)	<= A(10);
 	IDE_A(2)	<= A(11);
-	ROM_BANK	<= A(19 downto 16);
+	ROM_BANK	<= "0000";
 	ROM_WE	<= '1';
 	ROM_OE	<= ROM_OE_S;				
 
