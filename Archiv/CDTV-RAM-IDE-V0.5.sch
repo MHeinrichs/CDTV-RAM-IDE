@@ -10603,15 +10603,15 @@ Source: http://www.st.com/stonline/products/literature/ds/7194/ld1117axx.pdf</de
 <part name="IC6" library="Alliance_Memory_By_element14_Batch_1" deviceset="AS4C4M16S-6TCN" device=""/>
 <part name="IC8" library="am29-memory" deviceset="AM29F010*" device="J-SOCKET" value="AM29F010J-SOCKET"/>
 <part name="IC9" library="micro-mc68000" deviceset="MC68000P" device="ROUND-PAD-BIG-HOLE"/>
-<part name="IC10" library="SMD-Crystal" deviceset="CSX-750FC" device="FC(5V)"/>
+<part name="IC10" library="SMD-Crystal" deviceset="CSX-750FC" device="FC(5V)" value="50MHz"/>
 <part name="C1" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
 <part name="C2" library="rcl" deviceset="C-EU" device="C0805K" value="10u"/>
-<part name="C7" library="rcl" deviceset="C-EU" device="C0603K"/>
-<part name="C8" library="rcl" deviceset="C-EU" device="C0603K"/>
-<part name="C9" library="rcl" deviceset="C-EU" device="C0603K"/>
-<part name="C10" library="rcl" deviceset="C-EU" device="C0603K"/>
-<part name="C11" library="rcl" deviceset="C-EU" device="C0603K"/>
-<part name="C12" library="rcl" deviceset="C-EU" device="C0603K"/>
+<part name="C7" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
+<part name="C8" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
+<part name="C9" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
+<part name="C10" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
+<part name="C11" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
+<part name="C12" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
 <part name="C13" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
 <part name="C14" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
 <part name="C15" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
@@ -10650,8 +10650,8 @@ Source: http://www.st.com/stonline/products/literature/ds/7194/ld1117axx.pdf</de
 <part name="GND17" library="supply1" deviceset="GND" device=""/>
 <part name="GND18" library="supply1" deviceset="GND" device=""/>
 <part name="GND19" library="supply1" deviceset="GND" device=""/>
-<part name="C19" library="rcl" deviceset="C-EU" device="C0603K"/>
-<part name="R1" library="rcl" deviceset="R-EU_" device="R0603"/>
+<part name="C19" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
+<part name="R1" library="rcl" deviceset="R-EU_" device="R0603" value="FERRITE"/>
 <part name="+3V2" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V16" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND20" library="supply1" deviceset="GND" device=""/>
@@ -10660,7 +10660,7 @@ Source: http://www.st.com/stonline/products/literature/ds/7194/ld1117axx.pdf</de
 <part name="SV1" library="con-harting-ml" deviceset="ML40" device=""/>
 <part name="R2" library="rcl" deviceset="R-EU_" device="R0603" value="4.7k"/>
 <part name="R3" library="rcl" deviceset="R-EU_" device="R0603" value="4.7k"/>
-<part name="F1" library="rcl" deviceset="R-EU_" device="R2512" value="500mA"/>
+<part name="F1" library="rcl" deviceset="R-EU_" device="R2512" value="750mA"/>
 <part name="IC5" library="74xx-eu" deviceset="74*245" device="PW" technology="HCT" value="74HCT245PW"/>
 <part name="GND28" library="supply1" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" deviceset="+5V" device=""/>
@@ -10676,33 +10676,33 @@ Source: http://www.st.com/stonline/products/literature/ds/7194/ld1117axx.pdf</de
 <part name="C22" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
 <part name="C23" library="rcl" deviceset="C-EU" device="C0805K" value="10u"/>
 <part name="GND21" library="supply1" deviceset="GND" device=""/>
-<part name="RN1" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
-<part name="RN2" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
-<part name="RN3" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
-<part name="RN4" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
-<part name="RN5" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
-<part name="RN6" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
-<part name="RN7" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
-<part name="RN8" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
+<part name="RN1" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
+<part name="RN2" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
+<part name="RN3" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
+<part name="RN4" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
+<part name="RN5" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
+<part name="RN6" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
+<part name="RN7" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
+<part name="RN8" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
 <part name="IC7" library="v-reg" deviceset="LD117A?*" device="S" technology="33TR"/>
-<part name="R4" library="rcl" deviceset="R-EU_" device="R0603"/>
+<part name="R4" library="rcl" deviceset="R-EU_" device="R0603" value="47"/>
 <part name="AUTOBOOT_OFF" library="jumper" deviceset="JP1E" device=""/>
 <part name="R5" library="rcl" deviceset="R-EU_" device="R0603" value="4.7k"/>
-<part name="RN9" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
-<part name="RN10" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
+<part name="RN9" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
+<part name="RN10" library="resistor-dil" deviceset="4R-N" device="CAY16" value="33"/>
 <part name="MEM_OFF" library="jumper" deviceset="JP1E" device=""/>
 <part name="ACT" library="jumper" deviceset="JP1E" device=""/>
 <part name="POWER" library="jumper" deviceset="JP1E" device=""/>
 <part name="R6" library="rcl" deviceset="R-EU_" device="R0603" value="4.7k"/>
 <part name="R7" library="rcl" deviceset="R-EU_" device="R0603" value="330"/>
-<part name="C3" library="rcl" deviceset="C-EU" device="C0603K"/>
+<part name="C3" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
 <part name="GND22" library="supply1" deviceset="GND" device=""/>
 <part name="+3V17" library="supply1" deviceset="+3V3" device=""/>
-<part name="C4" library="rcl" deviceset="C-EU" device="C0603K"/>
+<part name="C4" library="rcl" deviceset="C-EU" device="C0603K" value="100n"/>
 <part name="GND24" library="supply1" deviceset="GND" device=""/>
 <part name="+3V18" library="supply1" deviceset="+3V3" device=""/>
 <part name="R8" library="rcl" deviceset="R-EU_" device="R0603" value="4.7k"/>
-<part name="RN11" library="resistor-dil" deviceset="4R-N" device="CAY16"/>
+<part name="RN11" library="resistor-dil" deviceset="4R-N" device="CAY16" value="4.7k"/>
 </parts>
 <sheets>
 <sheet>
