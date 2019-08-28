@@ -1,3 +1,0 @@
-vhdl work "gen_utils.vhd"
-vhdl work "conversions.vhd"
-vhdl work "mt48lc32m16a2.vhd"
